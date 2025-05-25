@@ -1,0 +1,45 @@
+{
+  "name": "matrix-figure-counter",
+  "version": "1.0.0",
+  "description": "A fast TypeScript library to count orthogonally connected figures (1s) in a 2D binary matrix. Ideal for grid analysis, puzzle solving, and computer vision preprocessing.",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "clean": "tsc --build --clean",
+    "build": "npm run clean & tsc -p ./tsconfig.json",
+    "prepack": "npm run build",
+    "test": "vitest run",
+    "lint": "npx eslint .",
+    "format": "prettier --write .",
+    "check-format": "prettier --check .",
+    "check-exports": "attw --pack . --ignore-rules=cjs-resolves-to-esm",
+    "local-release": "changeset version && changeset publish",
+    "prepublishOnly": "npm run ci",
+    "ci": "npm run build && npm run check-format && npm run check-exports && npm run lint && npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/an-lafchiev/matrix-figure-counter.git"
+  },
+  "author": "Anton Lafchiev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/an-lafchiev/matrix-figure-counter/issues"
+  },
+  "homepage": "https://github.com/an-lafchiev/matrix-figure-counter#readme",
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.1",
+    "@changesets/cli": "^2.29.4",
+    "@eslint/js": "^9.27.0",
+    "@types/node": "^22.15.21",
+    "eslint": "^9.27.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.32.1",
+    "vitest": "^3.1.4"
+  }
+}
