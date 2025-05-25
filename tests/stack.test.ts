@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import Stack from '../src/stack';
+import Stack from '../src/stackList';
 
 describe('Should ensure correct stack behavior', () => {
   it('initializes with length 0', () => {

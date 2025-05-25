@@ -1,4 +1,4 @@
-import Stack from './Stack.js';
+import Stack from './stackList.js';
 import type { AllowedValues, Point, ReadonlyTwoDArray } from './types/index.js';
 
 export const directions = [
