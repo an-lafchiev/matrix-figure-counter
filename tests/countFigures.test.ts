@@ -55,10 +55,36 @@ describe('should count total number of figures', () => {
   });
 
   it('works with large matrices', () => {
-    const size = 50;
-    const matrix = Array(size)
-      .fill(null)
-      .map(() => Array(size).fill(1));
-    expect(countFigures(matrix)).toBe(1); // all connected
+    const size = 1000;
+    const matrix = Array.from({ length: size }, () => Array(size).fill(1));
+
+    expect(countFigures(matrix)).toBe(1);
+  });
+
+  it('should work on specific examples', () => {
+    const matrix = [
+      [1, 0, 0, 0, 0],
+      [1, 0, 1, 1, 0],
+      [0, 1, 0, 1, 0],
+      [0, 1, 1, 1, 0],
+      [0, 0, 0, 0, 1],
+    ] as const;
+
+    expect(countFigures(matrix)).toBe(3);
+
+    const matrix10x10 = [
+      [1, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+      [1, 0, 0, 1, 1, 0, 1, 0, 1, 0],
+      [0, 0, 0, 1, 0, 0, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+      [0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [1, 0, 0, 1, 0, 1, 0, 0, 1, 0],
+      [1, 0, 0, 1, 0, 1, 0, 0, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 1, 0, 1, 1, 0, 1, 1, 0],
+    ] as const;
+
+    expect(countFigures(matrix10x10)).toBe(12);
   });
 });

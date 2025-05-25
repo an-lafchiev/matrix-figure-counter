@@ -1,4 +1,5 @@
-import type { AllowedValues, ReadonlyTwoDArray } from './types/index.js';
+import Stack from './Stack.js';
+import type { AllowedValues, Point, ReadonlyTwoDArray } from './types/index.js';
 
 export const directions = [
   [0, -1],
@@ -9,33 +10,31 @@ export const directions = [
 
 export function walkFigure<T>(
   matrix: ReadonlyTwoDArray<T>,
-  curr: { x: number; y: number },
+  start: Point,
   seen: boolean[][],
 ) {
   if (!matrix[0]) return false;
-  if (
-    curr.x < 0 ||
-    curr.x >= matrix[0].length ||
-    curr.y < 0 ||
-    curr.y >= matrix.length
-  ) {
-    return false;
-  }
 
-  if (seen[curr.y][curr.x]) {
-    return false;
-  }
+  const stack = new Stack<Point>();
+  stack.push(start);
 
-  if (!matrix[curr.y][curr.x]) {
-    seen[curr.y][curr.x] = true;
-    return false;
-  }
+  const matrixHeight = matrix.length;
+  const matrixWidth = matrix[0].length;
 
-  seen[curr.y][curr.x] = true;
+  while (stack.length > 0) {
+    const { x, y } = stack.pop() as Point;
 
-  for (let i = 0; i < directions.length; i++) {
-    const [dx, dy] = directions[i];
-    walkFigure(matrix, { x: curr.x + dx, y: curr.y + dy }, seen);
+    if (x < 0 || x >= matrixWidth || y < 0 || y >= matrixHeight) continue;
+    if (seen[y][x]) continue;
+
+    seen[y][x] = true;
+
+    if (!matrix[y][x]) continue;
+
+    for (let i = 0; i < directions.length; i++) {
+      const [dx, dy] = directions[i];
+      stack.push({ x: x + dx, y: y + dy });
+    }
   }
 
   return true;

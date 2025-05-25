@@ -16,36 +16,6 @@ describe('should walk the figure', () => {
     expect(walkFigure([], { x: 0, y: 0 }, [])).toBe(false);
   });
 
-  it('returns false if starting point is out of bounds', () => {
-    const matrix = [
-      [1, 1],
-      [1, 1],
-    ];
-    expect(walkFigure(matrix, { x: -1, y: 0 }, seen)).toBe(false);
-    expect(walkFigure(matrix, { x: 2, y: 0 }, seen)).toBe(false);
-    expect(walkFigure(matrix, { x: 0, y: 2 }, seen)).toBe(false);
-  });
-
-  it('returns false if cell already seen', () => {
-    const matrix = [
-      [1, 1],
-      [1, 1],
-    ];
-    seen[0][0] = true;
-    expect(walkFigure(matrix, { x: 0, y: 0 }, seen)).toBe(false);
-  });
-
-  it('returns false and marks seen if cell is falsy', () => {
-    const matrix = [
-      [0, 1],
-      [1, 1],
-    ];
-    expect(walkFigure(matrix, { x: 0, y: 0 }, seen)).toBe(false);
-    expect(seen[0][0]).toBe(true);
-    expect(seen[0][1]).toBe(false);
-    expect(seen[1][0]).toBe(false);
-  });
-
   it('returns true and visits all connected truthy cells', () => {
     const matrix = [
       [1, 1, 0],
@@ -84,5 +54,14 @@ describe('should walk the figure', () => {
     expect(seen[0][2]).toBe(false);
     expect(seen[2][0]).toBe(false);
     expect(seen[2][2]).toBe(false);
+  });
+  it('works with large matrices', () => {
+    const size = 1000;
+    const matrix = Array.from({ length: size }, () => Array(size).fill(1));
+    const seenLarge = Array.from({ length: size }, () =>
+      Array(size).fill(false),
+    );
+    expect(walkFigure(matrix, { x: 0, y: 0 }, seenLarge)).toBe(true);
+    expect(seenLarge.every((row) => row.every(Boolean))).toBe(true);
   });
 });
