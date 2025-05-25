@@ -1,1 +1,1 @@
-export { countFigures } from 'countFigures.js';
+export { countFigures } from './countFigures.js';
