@@ -1,6 +1,6 @@
 {
   "name": "matrix-figure-counter",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "A fast TypeScript library to count orthogonally connected figures (1s) in a 2D binary matrix. Ideal for grid analysis, puzzle solving, and computer vision preprocessing.",
   "type": "module",
   "types": "./dist/index.d.ts",
